@@ -1,5 +1,89 @@
-.cha-container{
-    background: blueviolet;
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  min-height: 100vh;
+  background-color: transparent;
+}
+
+.character {
+ 
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background-color: 333;
+  border: 2px solid #747474;
+  border-radius: 20px;
+  width: 160vh;
+  min-height: 80vh;
+  box-sizing: border-box;
 }
 
 
+.cha-cha-card {
+  background: transparent;
+  position: relative;
+  display: flex;
+  margin-top: 50vh;
+  margin-left: 10vw;
+}
+
+.cha-btn {
+  background: none;
+  display: flex;
+  margin-left: 20vh;
+  margin-top: 70vh;
+  gap: 15px;
+}
+
+.cha-btn-next, .cha-btn-back{
+  display: flex;
+  justify-content: center;
+  font-size: 18px;
+  width: 60px;
+  border: 2px, solid #747474;
+  border-radius: 20px;
+  color:#747474;
+}
+.cha-btn-next:hover, .cha-btn-back:hover{
+  scale: 1.1;
+  transition: 0.2s;
+}
+.cha-btn-next:active, .cha-btn-back:active{
+  scale: .9.9;
+  transition: 0.2s;
+}
+
+
+
+
+@media (max-width: 768px) {
+  .character {
+    padding: 15px;
+    min-height: 50vh;
+  }
+
+  .cha-container {
+    height: auto;
+    min-height: 300px;
+    padding: 15px;
+  }
+
+}
+
+@media (max-width: 600px) {
+  .character {
+    padding: 10px;
+    min-height: auto;
+  }
+
+  .cha-container {
+    padding: 10px;
+  }
+
+}

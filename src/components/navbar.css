@@ -1,12 +1,12 @@
 .nav-container {
     position: fixed;
-    top: 0;
+    top: 10px;
     left: 0;
     right: 0;
     height: 50px;
-    background-color: #333;
-    color: white;
-    padding: 10px;
+    background-color: #252525;
+    color: #747474;
+    padding: 1px;
     display: flex;
     align-items: center;
     border-bottom: 2px solid #747474;
@@ -15,8 +15,8 @@
 
 .nav-link-home {
     margin-left: 5vh;
-    font-size: 16px;
-    color: white;
+    font-size: 18px;
+    color: #747474;
     text-decoration: none;
 }
 
@@ -27,9 +27,9 @@
 
 .nav-btn-fav {
     all: unset;
-    color: white;
+    color: #747474;
     margin-left: 2vh;
-    font-size: 16px;
+    font-size: 18px;
     border-radius: 12px;
     padding: 5px 10px;
     cursor: pointer;
