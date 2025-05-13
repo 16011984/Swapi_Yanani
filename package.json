@@ -24,9 +24,23 @@
         "eslint-plugin-react": "^7.33.1",
         "eslint-plugin-react-hooks": "^4.6.0",
         "eslint-plugin-react-refresh": "^0.4.3",
+        "tailwindcss": "^4.1.6",
         "vite": "^4.4.8"
     },
     "engines": {
-    "node": ">=20.0.0"
-  }
+        "node": ">=20.0.0"
+    },
+    "description": "",
+    "main": "vite.config.js",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/16011984/Swapi_Yanani.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/16011984/Swapi_Yanani/issues"
+    },
+    "homepage": "https://github.com/16011984/Swapi_Yanani#readme"
 }

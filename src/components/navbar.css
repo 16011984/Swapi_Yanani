@@ -1,0 +1,41 @@
+.nav-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50px;
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid #747474;
+    z-index: 1000;
+}
+
+.nav-link-home {
+    margin-left: 5vh;
+    font-size: 16px;
+    color: white;
+    text-decoration: none;
+}
+
+.nav-link-home:hover {
+    scale: 1.1;
+    transition: 0.1s;
+}
+
+.nav-btn-fav {
+    all: unset;
+    color: white;
+    margin-left: 2vh;
+    font-size: 16px;
+    border-radius: 12px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.nav-btn-fav:hover {
+    scale: 1.1;
+    transition: 0.1s;
+}
