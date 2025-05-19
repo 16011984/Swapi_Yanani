@@ -76,13 +76,6 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: repeating-linear-gradient(
-    45deg, 
-    rgba(0, 0, 0, 0.1), 
-    rgba(0, 0, 0, 0.1) 15px, 
-    rgba(255, 255, 255, 0.05) 15px, 
-    rgba(255, 255, 255, 0.05) 30px
-  );
 }
 
 .character-initial {
@@ -93,12 +86,13 @@ body {
   user-select: none;
 }
 
-/* Información del personaje superpuesta */
+
 .character-info-overlay {
+  background-color: transparent;
   position: relative;
   z-index: 2;
   width: 100%;
-  margin-top: 50px;
+  margin-top: 450px;
   padding: 30px;
   display: flex;
   flex-direction: column;
@@ -107,6 +101,7 @@ body {
 }
 
 .character-name {
+  background-color: transparent;
   position: relative;
   color: #fff;
   font-size: 5rem;
@@ -129,6 +124,7 @@ body {
 }
 
 .character-attributes {
+  background-color: transparent;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -138,7 +134,7 @@ body {
 }
 
 .attribute {
-  background-color: rgba(0, 10, 30, 0.7);
+ background-color: transparent;
   border: 1px solid rgba(80, 180, 255, 0.5);
   border-radius: 10px;
   padding: 15px 25px;
@@ -156,6 +152,7 @@ body {
 }
 
 .attribute-label {
+  background-color: transparent;
   color: rgba(80, 180, 255, 0.9);
   font-size: 0.9rem;
   font-weight: 600;
@@ -165,13 +162,14 @@ body {
 }
 
 .attribute-value {
+  background-color: transparent;
   color: #fff;
   font-size: 1.2rem;
   font-weight: 400;
   text-align: center;
 }
 
-/* Slider de personajes en la parte inferior */
+
 .character-slider {
   position: relative;
   z-index: 2;
@@ -182,13 +180,19 @@ body {
   padding: 20px;
   margin-top: auto;
   box-sizing: border-box;
-  background-color: rgba(0, 10, 30, 0.7);
+  background-color: transparent;
   backdrop-filter: blur(10px);
   border-top: 1px solid rgba(80, 180, 255, 0.3);
 }
 
 .slider-item {
-  width: 100px;
+  background-color: transparent;
+  width: 120px;
+  height: 100px;
+  border-radius: 20px;
+  border-style: solid 1px;
+  border: 1px solid rgba(80, 180, 255, 0.5);
+  box-shadow: 0 0 15px rgba(80, 180, 255, 0.3);
   cursor: pointer;
   display: flex;
   flex-direction: column;
@@ -205,6 +209,7 @@ body {
 }
 
 .slider-visual {
+  margin-top: 8px;
   width: 60px;
   height: 60px;
   border-radius: 50%;
@@ -223,12 +228,14 @@ body {
 }
 
 .slider-initial {
+   background-color: transparent;
   font-size: 30px;
   font-weight: bold;
-  color: rgba(255, 255, 255, 0.7);
+  color: rgb(0, 0, 0);
 }
 
 .slider-name {
+  background-color: transparent;
   margin-top: 8px;
   font-size: 0.8rem;
   color: #fff;
@@ -239,7 +246,7 @@ body {
   max-width: 100px;
 }
 
-/* Botones de navegación */
+/* Botones */
 .cha-btn {
   position: relative;
   z-index: 2;
@@ -278,7 +285,7 @@ body {
   transform: scale(0.95);
 }
 
-/* Estilos para estados de carga y error */
+
 .character.loading, .character.error {
   display: flex;
   justify-content: center;
@@ -293,7 +300,7 @@ body {
   color: #ff6b6b;
 }
 
-/* Animaciones */
+
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
@@ -303,7 +310,7 @@ body {
   animation: fadeIn 1s ease;
 }
 
-/* Efecto de rastro luminoso del cursor */
+
 .character::after {
   content: '';
   position: fixed;
@@ -322,7 +329,7 @@ body {
   opacity: 1;
 }
 
-/* Estilos responsivos */
+/* responsive */
 @media (max-width: 1200px) {
   .character {
     width: 90vw;

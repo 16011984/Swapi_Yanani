@@ -7,26 +7,23 @@ const CharacterCard = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   
-  // Función para obtener el ID correcto del personaje basado en el ID de la SWAPI
+  // Función para obtener el ID del personaje de SWAPI
   const getCharacterId = (swapiId) => {
-    // En el repositorio de vieraboschkova/swapi-gallery, las imágenes están nombradas por su ID
     return swapiId;
   };
 
-  // Función para generar la URL de la imagen basada en el ID del personaje
+  // Función modificada para usar una API de imágenes alternativa
   const getCharacterImageUrl = (id) => {
-    // URL base para las imágenes del nuevo repositorio
-    return `https://raw.githubusercontent.com/vieraboschkova/swapi-gallery/main/static/assets/img/people/${id}.jpg`;
+    // Usamos starwars-visualguide.com que proporciona imágenes oficiales de Star Wars
+    return `https://starwars-visualguide.com/assets/img/characters/${id}.jpg`;
   };
 
-  // Función para manejar el botón siguiente
   const handleNext = () => {
     if (characters.length > 0) {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % characters.length);
     }
   };
 
-  // Función para manejar el botón anterior
   const handlePrevious = () => {
     if (characters.length > 0) {
       setCurrentIndex((prevIndex) => (prevIndex - 1 + characters.length) % characters.length);
@@ -36,7 +33,6 @@ const CharacterCard = () => {
   useEffect(() => {
     const fetchCharacters = async () => {
       try {
-        // Hacemos la petición a la API de SWAPI para obtener personajes
         const response = await fetch("https://www.swapi.tech/api/people?page=1&limit=20");
         
         if (!response.ok) {
@@ -45,7 +41,6 @@ const CharacterCard = () => {
         
         const data = await response.json();
         
-        // Para cada personaje, necesitamos hacer una petición adicional para obtener detalles
         const characterDetailsPromises = data.results.map(async (character) => {
           const detailResponse = await fetch(character.url);
           const detailData = await detailResponse.json();
@@ -56,7 +51,6 @@ const CharacterCard = () => {
           };
         });
         
-        // Esperamos a que todas las peticiones de detalles se completen
         const detailedCharacters = await Promise.all(characterDetailsPromises);
         setCharacters(detailedCharacters);
         setLoading(false);
@@ -70,9 +64,7 @@ const CharacterCard = () => {
     fetchCharacters();
   }, []);
 
-  // Pasamos las funciones al componente padre
   useEffect(() => {
-    // Buscar los botones en el componente padre
     const nextButton = document.querySelector('.cha-btn-next');
     const backButton = document.querySelector('.cha-btn-back');
     
@@ -94,7 +86,7 @@ const CharacterCard = () => {
         backButton.removeEventListener('click', handlePrevious);
       }
     };
-  }, [characters.length]); // Solo se re-ejecuta si cambia el número de personajes
+  }, [characters.length]); 
 
   if (loading) {
     return <div className="cha_card loading">Cargando personajes...</div>;
@@ -103,13 +95,11 @@ const CharacterCard = () => {
   if (error) {
     return <div className="cha_card error">{error}</div>;
   }
-
-  // Si no hay personajes, mostrar un mensaje
+  
   if (characters.length === 0) {
     return <div className="cha_card">No se encontraron personajes</div>;
   }
-
-  // Mostrar solo el personaje actual
+  
   const character = characters[currentIndex];
 
   return (
@@ -119,7 +109,7 @@ const CharacterCard = () => {
           src={character.imageUrl} 
           alt={`Imagen de ${character.name}`}
           onError={(e) => {
-            // Si la imagen no se puede cargar, mostrar el fallback
+         
             e.target.onerror = null;
             e.target.style.display = "none";
             
@@ -131,7 +121,7 @@ const CharacterCard = () => {
             textContainer.textContent = character.name;
             fallbackContainer.appendChild(textContainer);
             
-            // Añadir el fallback al DOM
+            
             e.target.parentNode.appendChild(fallbackContainer);
           }}
           className="char-image"

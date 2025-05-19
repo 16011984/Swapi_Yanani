@@ -185,7 +185,7 @@ const Character = () => {
         </div>
       </div>
       
-      {/* Información del personaje superpuesta */}
+      {/* Información del personaje */}
       <div className="character-info-overlay">
         <h1 className="character-name">{selectedCharacter.name}</h1>
         <div className="character-attributes">
@@ -220,7 +220,7 @@ const Character = () => {
         </div>
       </div>
 
-      {/* Slider de personajes en la parte inferior */}
+      {/* Slider */}
       <div className="character-slider">
         {visibleCharacters.map((character, index) => (
           <div 
@@ -241,7 +241,7 @@ const Character = () => {
         ))}
       </div>
 
-      {/* Botones de navegación */}
+      {/* Botones */}
       <div className="cha-btn">
         <button className="cha-btn-back"> Back </button>
         <button className="cha-btn-next"> Next </button>
