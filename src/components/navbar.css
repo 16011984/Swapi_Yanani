@@ -14,14 +14,14 @@
     z-index: 1000;
 }
 
-.nav-link-home {
+.nav-link-home, .nav-link {
     margin-left: 5vh;
     font-size: 18px;
     color: #747474;
     text-decoration: none;
 }
 
-.nav-link-home:hover {
+.nav-link-home:hover, .nav-link:hover {
     scale: 1.1;
     transition: 0.1s;
 }
@@ -29,7 +29,8 @@
 .nav-btn-fav {
     all: unset;
     color: #747474;
-    margin-left: 2vh;
+    margin-left: auto;
+    margin-right: 5vh;
     font-size: 18px;
     border-radius: 12px;
     padding: 5px 10px;
@@ -65,13 +66,14 @@
 
 .favorites-container {
     position: relative;
+    margin-left: auto;
 }
 
 .favorites-dropdown {
     position: absolute;
     top: 100%;
-    right: 1;
-    width: 280px;
+    right: 5vh;
+    width: 320px;
     background-color: #252525;
     border: 2px solid #747474;
     border-radius: 8px;
@@ -116,6 +118,44 @@
     color: #f5e027;
     font-size: 16px;
     text-align: center;
+    margin-bottom: 10px;
+}
+
+/* Nuevo selector de categorías */
+.favorites-category-selector {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+    border-top: 1px solid #4a4a4a;
+    border-bottom: 1px solid #4a4a4a;
+    margin-top: 5px;
+}
+
+.favorites-category-selector button {
+    flex: 1;
+    background: none;
+    border: none;
+    color: #999;
+    font-size: 12px;
+    padding: 5px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: center;
+}
+
+.favorites-category-selector button:hover {
+    color: #fff;
+}
+
+.favorites-category-selector button.active {
+    color: #f5e027;
+    font-weight: bold;
+    border-bottom: 2px solid #f5e027;
+}
+
+.favorites-category-selector button span {
+    font-size: 10px;
+    opacity: 0.7;
 }
 
 .favorites-list {

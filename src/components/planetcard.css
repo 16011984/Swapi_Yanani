@@ -1,0 +1,229 @@
+.planets-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin: 20px;
+}
+
+.pla_card {
+  background-color: #1a1a1a;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  color: #fff;
+  border: 1px solid #3F51B5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.pla_card:not(.small) {
+  width: 300px;
+}
+
+.pla_card.small {
+  width: 180px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.pla_card.small.selected {
+  border-color: #3F51B5;
+  box-shadow: 0 0 15px rgba(63, 81, 181, 0.5);
+}
+
+.pla_card.selected {
+  border-color: #3F51B5;
+  box-shadow: 0 8px 25px rgba(63, 81, 181, 0.3);
+}
+
+.pla_card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  border-color: #3F51B5;
+}
+
+.pla_card h2 {
+  color: #3F51B5; 
+  margin-bottom: 15px;
+  text-align: center;
+  font-size: 22px;
+}
+
+.pla-image-container {
+  width: 100%;
+  height: 250px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(63, 81, 181, 0.3);
+}
+
+.pla_card.small .pla-image-container {
+  height: 150px;
+  margin-bottom: 0;
+}
+
+.pla-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  transition: transform 0.3s ease;
+}
+
+.pla-image:hover {
+  transform: scale(1.05);
+}
+
+.pla-visual {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.pla-visual:hover {
+  transform: scale(1.05);
+}
+
+.pla-initial {
+  font-size: 120px;
+  font-weight: bold;
+  color: rgba(255, 255, 255, 0.7);
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.pla_card.small .pla-initial {
+  font-size: 70px;
+}
+
+.pla-name-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 10px;
+  text-align: center;
+  font-weight: bold;
+  color: #3F51B5;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+.pla_card.small .pla-name-overlay {
+  padding: 5px;
+  font-size: 12px;
+}
+
+.pla-details {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.pla-details p {
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+}
+
+.pla-details strong {
+  color: #7986CB;
+}
+
+.pla_card.loading, .pla_card.error {
+  text-align: center;
+  font-size: 18px;
+  padding: 40px;
+  background-color: rgba(0, 0, 0, 0.7);
+  width: 100%;
+  max-width: 500px;
+  margin: 50px auto;
+  border-radius: 8px;
+}
+
+.pla_card.error {
+  color: #ff6b6b;
+  border: 1px solid #ff6b6b;
+}
+
+.pla_card.loading {
+  color: #3F51B5;
+  border: 1px solid #3F51B5;
+}
+
+/* Fallback para imágenes que no cargan */
+.fallback-image {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #1a1a1a, #2c2c2c);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.fallback-image-text {
+  color: #3F51B5;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  padding: 20px;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+}
+
+@media (max-width: 768px) {
+  .pla_card:not(.small) {
+    width: 280px;
+  }
+  
+  .pla_card.small {
+    width: 150px;
+  }
+  
+  .pla_card.small .pla-image-container {
+    height: 120px;
+  }
+  
+  .pla_card.small .pla-initial {
+    font-size: 60px;
+  }
+}
+
+@media (max-width: 480px) {
+  .pla_card:not(.small) {
+    width: 250px;
+  }
+  
+  .pla_card.small {
+    width: 120px;
+    padding: 8px;
+  }
+  
+  .pla_card.small .pla-image-container {
+    height: 100px;
+  }
+  
+  .pla_card.small .pla-initial {
+    font-size: 50px;
+  }
+  
+  .pla-image-container {
+    height: 200px;
+  }
+  
+  .pla-initial {
+    font-size: 100px;
+  }
+}
