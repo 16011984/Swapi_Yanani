@@ -1,11 +1,68 @@
-.cha_card{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: transparent;
-    border: 2px solid #747474;
-    border-radius: 40px;
-    width: 18vh;
-    height: 25vh;
-    
+.characters-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin: 20px;
+}
+
+.cha_card {
+  background-color: #1a1a1a;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  width: 300px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  color: #fff;
+  border: 1px solid #444;
+}
+
+.cha_card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  border-color: #f5e027;
+}
+
+.cha_card h2 {
+  color: #f5e027; /* Color amarillo de Star Wars */
+  margin-bottom: 15px;
+  text-align: center;
+  font-size: 22px;
+}
+
+.char-details {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.char-details p {
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+}
+
+.char-details strong {
+  color: #78a2cc;
+}
+
+.loading, .error {
+  text-align: center;
+  font-size: 18px;
+  padding: 40px;
+  background-color: rgba(0, 0, 0, 0.7);
+  width: 100%;
+  max-width: 500px;
+  margin: 50px auto;
+  border-radius: 8px;
+}
+
+.error {
+  color: #ff6b6b;
+  border: 1px solid #ff6b6b;
+}
+
+.loading {
+  color: #f5e027;
+  border: 1px solid #f5e027;
 }

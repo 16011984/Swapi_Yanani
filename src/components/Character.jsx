@@ -11,9 +11,20 @@ const Character = () => {
                                 <button className="cha-btn-back"> Back </button>
                         </div>
 
-                        <div className="cha-cha-card">
-                                <CharacterCard />
+                        <div className="carousel">
+
+                                <div className="list">
+
+                                        <div className="cha-cha-card">
+                                                <CharacterCard />
+                                        </div>
+                                </div>
+
+
                         </div>
+
+
+
 
                 </div>
 
