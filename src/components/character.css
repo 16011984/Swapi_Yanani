@@ -17,34 +17,15 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 0;
-  background-color: transparent;
   border: 2px solid #447BB0;
   border-radius: 20px;
-  width: 100vw;
-  min-height: 80vh;
+  width: 80vw;
+  min-height: 90vh;
   box-sizing: border-box;
   overflow: hidden;
 }
 
-/* Fondo de estrellas */
-.character::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #000;
-  background-image: 
-    radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 40px),
-    radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 30px),
-    radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 40px),
-    radial-gradient(rgba(255,255,255,.4), rgba(255,255,255,.1) 2px, transparent 30px);
-  background-size: 550px 550px, 350px 350px, 250px 250px, 150px 150px;
-  background-position: 0 0, 40px 60px, 130px 270px, 70px 100px;
-  z-index: 0;
-  animation: stars-animation 200s linear infinite;
-}
+
 
 @keyframes stars-animation {
   0% {
@@ -107,7 +88,7 @@ body {
   font-size: 5rem;
   font-weight: 700;
   text-align: center;
-  top: -40px;
+  top: -450px;
   text-shadow: 0 0 10px rgba(255, 255, 255, 0.5), 0 0 20px rgba(80, 180, 255, 0.5);
   letter-spacing: 2px;
 }
@@ -135,14 +116,14 @@ body {
 
 .attribute {
  background-color: transparent;
-  border: 1px solid rgba(80, 180, 255, 0.5);
+  border: 1px solid white;
   border-radius: 10px;
   padding: 15px 25px;
   display: flex;
   flex-direction: column;
   align-items: center;
   backdrop-filter: blur(5px);
-  box-shadow: 0 0 15px rgba(80, 180, 255, 0.3);
+  box-shadow: 0 0 15px rgba(78, 172, 243, 0.614);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -191,8 +172,8 @@ body {
   height: 100px;
   border-radius: 20px;
   border-style: solid 1px;
-  border: 1px solid rgba(80, 180, 255, 0.5);
-  box-shadow: 0 0 15px rgba(80, 180, 255, 0.3);
+  border: 1px solid white;
+  box-shadow: 0 0 15px rgba(78, 172, 243, 0.614);
   cursor: pointer;
   display: flex;
   flex-direction: column;
@@ -248,6 +229,7 @@ body {
 
 /* Botones */
 .cha-btn {
+  background-color: transparent;
   position: relative;
   z-index: 2;
   display: flex;
@@ -476,5 +458,117 @@ body {
     width: 80px;
     height: 35px;
     font-size: 14px;
+  }
+}
+
+
+
+.add-to-favorites-btn {
+  background-color: rgba(0, 10, 30, 0.7);
+  border: 2px solid rgba(80, 180, 255, 0.5);
+  border-radius: 20px;
+  color: rgba(80, 180, 255, 0.9);
+  font-size: 16px;
+  font-weight: bold;
+  padding: 10px 20px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  backdrop-filter: blur(5px);
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.add-to-favorites-btn:hover {
+  transform: scale(1.05);
+  background-color: rgba(80, 180, 255, 0.2);
+  border-color: rgba(80, 180, 255, 0.9);
+  box-shadow: 0 0 15px rgba(80, 180, 255, 0.5);
+}
+
+.add-to-favorites-btn:active {
+  transform: scale(0.95);
+}
+
+
+.add-to-favorites-btn.already-favorite {
+  background-color: rgba(80, 180, 255, 0.2);
+  border-color: #f5e027;
+  color: #f5e027;
+}
+
+.add-to-favorites-btn.already-favorite:hover {
+  box-shadow: 0 0 15px rgba(245, 224, 39, 0.5);
+}
+
+
+.favorite-notification {
+  position: fixed;
+  top: 70px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  padding: 12px 25px;
+  border-radius: 20px;
+  z-index: 1100;
+  font-size: 16px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  animation: notificationFadeIn 0.3s ease, notificationFadeOut 0.3s ease 1.7s forwards;
+}
+
+.favorite-notification.added {
+  border: 2px solid #4caf50;
+}
+
+.favorite-notification.already {
+  border: 2px solid #f5e027;
+}
+
+@keyframes notificationFadeIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -20px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+@keyframes notificationFadeOut {
+  from {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+  to {
+    opacity: 0;
+    transform: translate(-50%, -20px);
+  }
+}
+
+
+@media (max-width: 900px) {
+  .add-to-favorites-btn {
+    font-size: 14px;
+    padding: 8px 16px;
+    margin-bottom: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .add-to-favorites-btn {
+    font-size: 12px;
+    padding: 6px 12px;
+    margin-bottom: 10px;
+  }
+  
+  .favorite-notification {
+    font-size: 14px;
+    padding: 10px 20px;
+    top: 60px;
   }
 }

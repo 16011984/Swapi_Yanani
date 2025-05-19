@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import "./character.css";
-import CharacterCard from "./Charactercard";
 
 const Character = () => {
   const [characters, setCharacters] = useState([]);
@@ -8,39 +7,48 @@ const Character = () => {
   const [visibleRange, setVisibleRange] = useState({ start: 0, end: 3 });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  // Estado para manejar los favoritos
+  const [favorites, setFavorites] = useState(() => {
+   
+    const savedFavorites = localStorage.getItem('starWarsFavorites');
+    return savedFavorites ? JSON.parse(savedFavorites) : [];
+  });
 
-  // Función para manejar el botón siguiente
+  const [showNotification, setShowNotification] = useState(false);
+  const [notificationMessage, setNotificationMessage] = useState("");
+
+ 
   const handleNext = () => {
     if (characters.length > 0) {
       const newIndex = (selectedIndex + 1) % characters.length;
       setSelectedIndex(newIndex);
       
-      // Ajustar el rango visible si es necesario
+     
       updateVisibleRange(newIndex);
     }
   };
 
-  // Función para manejar el botón anterior
+
   const handlePrevious = () => {
     if (characters.length > 0) {
       const newIndex = (selectedIndex - 1 + characters.length) % characters.length;
       setSelectedIndex(newIndex);
       
-      // Ajustar el rango visible si es necesario
+     
       updateVisibleRange(newIndex);
     }
   };
 
-  // Función para actualizar el rango visible basado en el índice seleccionado
+  
   const updateVisibleRange = (index) => {
-    const visibleCount = 4; // Número de tarjetas visibles en el slider
-    
-    // Si el índice seleccionado está fuera del rango visible actual, ajustamos el rango
+    const visibleCount = 4; 
+
+
     if (index < visibleRange.start || index >= visibleRange.end) {
-      // Calculamos nuevo inicio basado en el índice seleccionado
+      
       let newStart = Math.max(0, index - 1);
       
-      // Aseguramos que no exceda el límite de caracteres
+      
       if (newStart + visibleCount > characters.length) {
         newStart = Math.max(0, characters.length - visibleCount);
       }
@@ -52,12 +60,12 @@ const Character = () => {
     }
   };
 
-  // Función para seleccionar un personaje directamente
+  
   const handleSelectCharacter = (index) => {
     setSelectedIndex(index);
   };
 
-  // Función para obtener color basado en personaje
+
   const getCharacterColor = (id) => {
     // Colores basados en el ID del personaje
     const colors = [
@@ -83,15 +91,61 @@ const Character = () => {
       '#4B0082', // Índigo (Palpatine)
     ];
     
-    // Seleccionar un color basado en el ID (usando módulo para asegurarnos de que esté dentro del rango)
+   
     const colorIndex = (parseInt(id) - 1) % colors.length;
     return colors[colorIndex];
+  };
+
+  
+  const addToFavorites = () => {
+    if (characters.length > 0) {
+      const character = characters[selectedIndex];
+      
+      
+      const isAlreadyFavorite = favorites.some(fav => fav.id === character.id);
+      
+      if (!isAlreadyFavorite) {
+        
+        const favoriteCharacter = {
+          id: character.id,
+          name: character.name,
+          color: getCharacterColor(character.id)
+        };
+        
+        
+        const newFavorites = [...favorites, favoriteCharacter];
+        setFavorites(newFavorites);
+        
+        // Guardar en localStorage
+        localStorage.setItem('starWarsFavorites', JSON.stringify(newFavorites));
+        
+       
+        setNotificationMessage(`${character.name} añadido a favoritos!`);
+        setShowNotification(true);
+        setTimeout(() => {
+          setShowNotification(false);
+        }, 2000);
+        
+        
+        const event = new CustomEvent('favoritesUpdated', {
+          detail: { favorites: newFavorites }
+        });
+        window.dispatchEvent(event);
+      } else {
+        
+        setNotificationMessage(`${character.name} ya está en tus favoritos!`);
+        setShowNotification(true);
+        setTimeout(() => {
+          setShowNotification(false);
+        }, 2000);
+      }
+    }
   };
 
   useEffect(() => {
     const fetchCharacters = async () => {
       try {
-        // Hacemos la petición a la API de SWAPI para obtener personajes
+       
         const response = await fetch("https://www.swapi.tech/api/people?page=1&limit=20");
         
         if (!response.ok) {
@@ -100,7 +154,7 @@ const Character = () => {
         
         const data = await response.json();
         
-        // Para cada personaje, necesitamos hacer una petición adicional para obtener detalles
+       
         const characterDetailsPromises = data.results.map(async (character) => {
           const detailResponse = await fetch(character.url);
           const detailData = await detailResponse.json();
@@ -110,7 +164,7 @@ const Character = () => {
           };
         });
         
-        // Esperamos a que todas las peticiones de detalles se completen
+        
         const detailedCharacters = await Promise.all(characterDetailsPromises);
         setCharacters(detailedCharacters);
         setLoading(false);
@@ -124,32 +178,6 @@ const Character = () => {
     fetchCharacters();
   }, []);
 
-  // Conectamos los botones a las funciones
-  useEffect(() => {
-    // Buscar los botones en el DOM
-    const nextButton = document.querySelector('.cha-btn-next');
-    const backButton = document.querySelector('.cha-btn-back');
-    
-    if (nextButton) {
-      nextButton.addEventListener('click', handleNext);
-    }
-    
-    if (backButton) {
-      backButton.addEventListener('click', handlePrevious);
-    }
-    
-    // Limpieza al desmontar
-    return () => {
-      if (nextButton) {
-        nextButton.removeEventListener('click', handleNext);
-      }
-      
-      if (backButton) {
-        backButton.removeEventListener('click', handlePrevious);
-      }
-    };
-  }, [characters.length, selectedIndex]); // Depende de la longitud de personajes y el índice seleccionado
-
   if (loading) {
     return <div className="character loading">Cargando personajes...</div>;
   }
@@ -158,19 +186,29 @@ const Character = () => {
     return <div className="character error">{error}</div>;
   }
 
-  // Si no hay personajes, mostrar un mensaje
+ 
   if (characters.length === 0) {
     return <div className="character">No se encontraron personajes</div>;
   }
 
-  // Obtener el personaje seleccionado
+  
   const selectedCharacter = characters[selectedIndex];
 
-  // Obtener los personajes visibles para el slider
+  
+  const isAlreadyFavorite = favorites.some(fav => fav.id === selectedCharacter.id);
+
+  
   const visibleCharacters = characters.slice(visibleRange.start, visibleRange.end);
 
   return (
     <div className="character">
+      {/* Notificación de agregado a favoritos */}
+      {showNotification && (
+        <div className={`favorite-notification ${isAlreadyFavorite ? 'already' : 'added'}`}>
+          {notificationMessage}
+        </div>
+      )}
+      
       {/* Fondo con la visualización del personaje */}
       <div 
         className="character-backdrop"
@@ -188,6 +226,8 @@ const Character = () => {
       {/* Información del personaje */}
       <div className="character-info-overlay">
         <h1 className="character-name">{selectedCharacter.name}</h1>
+        
+
         <div className="character-attributes">
           <div className="attribute">
             <span className="attribute-label">Género</span>
@@ -218,7 +258,17 @@ const Character = () => {
             <span className="attribute-value">{selectedCharacter.skin_color}</span>
           </div>
         </div>
+
       </div>
+
+        {/* Botón de añadir a favoritos - Usando onClick de React */}
+        <button 
+          className={`add-to-favorites-btn ${isAlreadyFavorite ? 'already-favorite' : ''}`}
+          onClick={addToFavorites}
+          type="button"
+        >
+          {isAlreadyFavorite ? '★ En Favoritos' : '☆ Añadir a Favoritos'}
+        </button>
 
       {/* Slider */}
       <div className="character-slider">
@@ -241,10 +291,22 @@ const Character = () => {
         ))}
       </div>
 
-      {/* Botones */}
+      
       <div className="cha-btn">
-        <button className="cha-btn-back"> Back </button>
-        <button className="cha-btn-next"> Next </button>
+        <button 
+          className="cha-btn-back" 
+          onClick={handlePrevious}
+          type="button"
+        >
+          Back
+        </button>
+        <button 
+          className="cha-btn-next" 
+          onClick={handleNext}
+          type="button"
+        >
+          Next
+        </button>
       </div>
     </div>
   );
